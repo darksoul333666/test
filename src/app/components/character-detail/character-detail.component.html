@@ -1,22 +1,27 @@
-<div class="base-component container mt-5" style="overflow-y: auto;">
-  <div class="card-deck">
-    <div *ngIf="characters.length > 0; else noDataMessage">
-      <div class="biography-card" *ngFor="let character of characters">
-        <div class="background-image" [style.backgroundImage]="'url(' + character.image + ')'">
-          <div class="card-content">
-            <h5 class="card-title">{{ character.name }}</h5>
-            <p class="card-text"><strong>Género:</strong> {{ character.gender }}</p>
-            <p class="card-text"><strong>Especie:</strong> {{ character.species }}</p>
-            <p class="card-text"><strong>Estado:</strong> {{ character.status }}</p>
+<div class="base-component container ">
+    <ng-container *ngIf="characters.length > 0; else noDataMessage">
+      <div class="main">
+        <div class="card-deck">
+          <div class="card mb-4" *ngFor="let character of characters">
+            <div class="background-image card-img" [style.backgroundImage]="'url(' + character.image + ')'" style="height: 500px; background-size: cover;">
+              <p class="card-text"><strong>Género:</strong> {{ character.name }}</p>
+
+            </div>
+            <div class="card-body">
+              <p class="card-text"><strong>Género:</strong> {{ character.gender }}</p>
+              <p class="card-text"><strong>Especie:</strong> {{ character.species }}</p>
+              <p class="card-text"><strong>Estado:</strong> {{ character.status }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
 
     <ng-template #noDataMessage>
-      <div class="container bg-secondary" role="alert">
-        Antes de seleccionar datos, asegúrate de tener personajes.
+      <div class="col-12" style="text-align: center; font-size: 45px;">
+        <div class="container" role="alert">
+          Antes de seleccionar datos, asegúrate de tener personajes.
+        </div>
       </div>
     </ng-template>
-  </div>
 </div>
