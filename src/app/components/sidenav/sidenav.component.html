@@ -1,8 +1,13 @@
-<div class="col-12 text-white d-flex flex-row">
-   <div class="d-flex col-md-6 col-lg-2  bg-success">
-   <a [routerLink]="'/characters/1'" > Detalles</a>
-   </div>
-   <div class="d-flex col-md-6 col-lg-10 ">
-    <router-outlet></router-outlet>
+<div class="main-container">
+   <div class="col-12 text-black d-flex flex-row justify-content-center align-items-center p-3" style="background-color: white; border-radius: 15px;">
+      <div class="d-flex col-md-6 col-lg-2 " style="border-right: 1px solid purple; ">
+         <a [routerLink]="'/characters/1'">
+            <button type="button" class="btn text-black" style="width: 150px; height: 70px; border: 2px solid purple;">Seleccionar</button>
+         </a>
+      </div>
+      <div class="d-flex col-md-6 col-lg-10">
+         <router-outlet></router-outlet>
+      </div>
    </div>
 </div>
+
