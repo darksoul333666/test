@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import Character from 'src/app/interfaces/character.interface';
-import { LoadCharacters, SelectCharacters } from 'src/app/redux/actions/character.actions';
+import { LoadCharacters, SelectCharacters, ResetSelect } from 'src/app/redux/actions/character.actions';
 import { CharacterState, CharacterStateModel } from 'src/app/redux/state/character.state';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-character-list',
@@ -16,7 +17,7 @@ export class CharacterListComponent implements OnInit {
   public loading$: Observable<boolean>;
   public charactersSelected$: Observable<Character[]>;
 
-  constructor(private store: Store, private router: Router) {
+  constructor(private store: Store, private router: Router, private toast: ToastrService) {
     this.characters$ = this.store.select(CharacterState.getCharacters);
     this.loading$ = this.store.select((state: { characters: CharacterStateModel }) => state.characters.loading);
 
@@ -63,6 +64,14 @@ export class CharacterListComponent implements OnInit {
       });
       
       this.store.dispatch(new SelectCharacters({characters: selectedItems}))
-    this.router.navigate(['characters/:selectedItems'])
+      this.router.navigate(['characters/:selectedItems'])
+  }
+
+  public handleDeleteSelection(){
+    this.checkboxItems.forEach((item:any, id:number)=>{
+      if(item.selected === true) this.checkboxItems[id].selected = false;
+    })
+    this.store.dispatch(new ResetSelect());
+    this.toast.success('Has borrado tu selección');
   }
 }

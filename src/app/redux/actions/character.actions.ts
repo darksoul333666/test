@@ -22,6 +22,7 @@ export class SelectCharacters {
 
 export class ResetSelect {
   static readonly type = RESET_SELECT;
+  
 }
 
 export class GetCharactersSelected {
