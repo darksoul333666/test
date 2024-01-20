@@ -1,54 +1,104 @@
-// // character.state.ts
-// import { State, Action, StateContext, Selector } from '@ngxs/store';
-// import { tap } from 'rxjs/operators';
-// import { ApiService } from '...'; // Importa tu servicio de la API
-// import * as characterActions from  '../actions/character.actions'
-// import * as types from '../types/character.types'; // Importa tus tipos
+import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { Injectable } from '@angular/core';
+import { 
+LoadCharacters, 
+LoadCharactersSuccess, 
+LoadCharactersError,
+SelectCharacters,
+ResetSelect, 
+GetCharactersSelected} from '../actions/character.actions';
+import Character from '../../interfaces/character.interface';
+import { tap, catchError } from 'rxjs/operators';
+import { CharacterService } from 'src/app/services/character.service';
 
-// interface CharacterStateModel {
-//   characters: any[];
-//   loading: boolean;
-// }
+export interface CharacterStateModel {
+  characters: Character[];
+  charactersSelected: Character[];
+  loading: boolean;
+  error: any;
+}
 
-// @State<CharacterStateModel>({
-//   name: 'characters',
-//   defaults: {
-//     characters: [],
-//     loading: false,
-//   },
-// })
-// export class CharacterState {
-//   constructor(private apiService: ApiService) {}
+@State<CharacterStateModel>({
+  name: 'characters',
+  defaults: {
+    characters: [],
+    loading: false,
+    error: null,
+    charactersSelected: [],
+  },
+})
+@Injectable()
+export class CharacterState {
+  constructor(private characterService: CharacterService) {}
 
-//   @Selector()
-//   static getCharacters(state: CharacterStateModel) {
-//     return state.characters;
-//   }
+  @Selector()
+  static getCharacters(state: CharacterStateModel): Character[] {
+    return state.characters;
+  }
 
-//   @Selector()
-//   static isLoading(state: CharacterStateModel) {
-//     return state.loading;
-//   }
+  @Selector()
+  static getCharactersSelected(state: CharacterStateModel): Character[] {
+    return state.charactersSelected;
+  }
 
-//   @Action(characterActions.LoadCharacters)
-//   loadCharacters(ctx: StateContext<CharacterStateModel>) {
-//     ctx.patchState({ loading: true });
 
-//     return this.apiService.get('https://rickandmortyapi.com/api/character').pipe(
-//       tap((response: any) => {
-//         ctx.dispatch(new characterActions.LoadCharactersSuccess({ characters: response.results }));
-//       }),
-//     );
-//   }
 
-//   @Action(characterActions.LoadCharactersSuccess)
-//   loadCharactersSuccess(ctx: StateContext<CharacterStateModel>, action: characterActions.LoadCharactersSuccess) {
-//     ctx.patchState({ characters: action.characters, loading: false });
-//   }
+  @Action(LoadCharacters)
+  loadCharacters(ctx: StateContext<CharacterStateModel>) {
+    console.log("entrando a la accion");
+    
+    ctx.patchState({
+      loading: true,
+    });
 
-//   @Action(characterActions.LoadCharactersError)
-//   loadCharactersError(ctx: StateContext<CharacterStateModel>, action: characterActions.LoadCharactersError) {
-//     ctx.patchState({ loading: false });
-//     console.error(action.error);
-//   }
-// }
+    return this.characterService.getCharacters().pipe(
+      tap((characters) => {
+        ctx.dispatch(new LoadCharactersSuccess({ characters }));
+      }),
+      catchError((error) => {
+        ctx.dispatch(new LoadCharactersError({ error }));
+        throw error;
+      })
+    );
+  }
+
+  @Action(LoadCharactersSuccess)
+  loadCharactersSuccess(ctx: StateContext<CharacterStateModel>, action: LoadCharactersSuccess) {
+    const { characters } = action.payload;
+    ctx.patchState({
+      characters,
+      loading: false,
+      error: null,
+    });
+  }
+
+  @Action(LoadCharactersError)
+  loadCharactersError(ctx: StateContext<CharacterStateModel>, action: LoadCharactersError) {
+    const { error } = action.payload;
+    ctx.patchState({
+      loading: false,
+      error,
+    });
+  }
+
+  @Action(SelectCharacters)
+  selectCharacters(ctx: StateContext<CharacterStateModel>, action: SelectCharacters) {
+    const { characters } = action.payload;
+    ctx.patchState({
+      charactersSelected: characters,
+    });
+  }
+
+  @Action(GetCharactersSelected)
+  getCharactersSelected(ctx: StateContext<CharacterStateModel>) {
+    return ctx.getState().charactersSelected;
+  }
+
+  @Action(ResetSelect)
+  resetSelect(ctx: StateContext<CharacterStateModel>) {
+    ctx.patchState({
+      charactersSelected: [],
+    });
+  }
+  
+}

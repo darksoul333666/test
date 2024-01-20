@@ -7,7 +7,9 @@ import { CharacterDetailComponent } from './components/character-detail/characte
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
-// import { CharacterState } from './redux/state/character.state';
+import { CharacterState } from './redux/state/character.state';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 const routes: Routes = [
   { path: '', component: CharacterListComponent },
@@ -24,9 +26,18 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
+    HttpClientModule,
     NgxsModule.forRoot([
-      // CharacterState
+      CharacterState
     ]),
+    ToastrModule.forRoot({
+      toastClass: 'toast ngx-toastr',
+      closeButton: true,
+      autoDismiss: true,
+      progressBar: true,
+      timeOut: 2500,
+      onActivateTick: true
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
