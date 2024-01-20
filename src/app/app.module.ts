@@ -8,8 +8,10 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { CharacterState } from './redux/state/character.state';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { BlockUIModule } from 'ng-block-ui';
+import { LoadingInterceptor } from './interceptor/loading.interceptor';
 
 const routes: Routes = [
   { path: '', component: CharacterListComponent },
@@ -30,6 +32,7 @@ const routes: Routes = [
     NgxsModule.forRoot([
       CharacterState
     ]),
+    BlockUIModule.forRoot(),
     ToastrModule.forRoot({
       toastClass: 'toast ngx-toastr',
       closeButton: true,
@@ -39,7 +42,9 @@ const routes: Routes = [
       onActivateTick: true
     }),
   ],
-  providers: [],
+  providers: [  
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },      
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
