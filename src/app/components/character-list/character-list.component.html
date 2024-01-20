@@ -1,3 +1,30 @@
-<div class="">
-    Character List
-</div>
+
+<div class="container-fluid d-flex col-12 flex-column mt-5  bg-warning">
+    <div *ngIf="loading; else content">
+        <div class="d-flex justify-content-center mt-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+      </div>
+      <ng-template #content>
+        <div class="card-deck " style="overflow-y: auto; max-height: 400px;">
+            <div class="card mb-3" *ngFor="let item of checkboxItems">
+              <div class="card-body">
+                <input class="form-check-input me-1" type="checkbox" value="" [id]="item.id">
+                <label class="form-check-label stretched-link" [for]="item.id">{{ item.name }}</label>
+                <div class="avatar-container d-flex justify-content-end align-items-center">
+                  <span class="rounded-circle avatar-icon">
+                    <img [src]="item.image" class="img-fluid" alt="Avatar">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid  mt-5 w-100 bg-primary">
+            <button type="button" class="btn btn-success" (click)="handleButtonClick()">Success</button>
+          </div>
+      </ng-template>
+   
+  </div>
+  

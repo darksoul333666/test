@@ -1,3 +1,41 @@
-<div class="d-flex bg-secondary">
-    Character Detail Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto officia deleniti minima maxime! Est, sequi debitis modi inventore possimus dignissimos veritatis ab eum, culpa perspiciatis fugiat quod fuga animi rem?
-</div>
+<div class="container custom-container mt-5">
+    <div class="card-deck">
+      <!-- Verifica si la carga está en progreso -->
+      <div *ngIf="loading; else content">
+        <!-- Muestra el spinner mientras se carga -->
+        <div class="d-flex justify-content-center mt-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Muestra el contenido si no está cargando -->
+      <ng-template #content>
+        <!-- Utiliza ngIf para verificar si hay personajes -->
+        <div *ngIf="characters.length > 0; else noDataMessage">
+          <div class="card custom-card" *ngFor="let character of characters">
+            <div class="card-body bg-secondary d-flex">
+              <!-- Imagen vertical que cubre el 35% de la tarjeta -->
+              <img [src]="character.image" class="img-fluid me-3" style="width: 35%;" alt="Imagen">
+    
+              <!-- Información del personaje -->
+              <div>
+                <h5 class="card-title">{{ character.name }}</h5>
+                <p class="card-text"><strong>Género:</strong> {{ character.gender }}</p>
+                <p class="card-text"><strong>Especie:</strong> {{ character.species }}</p>
+                <p class="card-text"><strong>Estado:</strong> {{ character.status }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Mensaje que se muestra cuando no hay personajes -->
+        <ng-template #noDataMessage>
+          <div class="container -bg-secundary" role="alert">
+            Antes de seleccionar datos, asegúrate de tener personajes.
+          </div>
+        </ng-template>
+      </ng-template>
+    </div>
+  </div>
+  
