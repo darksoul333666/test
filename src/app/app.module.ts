@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BlockUIModule } from 'ng-block-ui';
 import { LoadingInterceptor } from './interceptor/loading.interceptor';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: CharacterListComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     NgxsModule.forRoot([
       CharacterState

@@ -1,11 +1,11 @@
-body, html, * {
-    margin: 0;
-    height: 100vh;
-    width: 100vw;
-    padding: 0;
-  }
+
 .custom-card {
     margin: 10px; /* Ajusta el margen según tus preferencias */
     background-color: #ffffff; /* Fondo blanco */
     border-radius: 10px; /* Bordes redondeados */
+  }
+
+  .base-component {
+    width: 100vw; 
+    height: 100vh;
   }

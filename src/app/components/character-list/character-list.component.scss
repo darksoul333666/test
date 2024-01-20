@@ -1,19 +1,31 @@
-body, html, * {
-    margin: 0;
-    height: 100vh;
-    width: 100vw;
-    padding: 0;
-  }
-.avatar-container {
-    width: 75px; /* Ajusta el ancho según tus necesidades */
-    height: 75px; /* Ajusta la altura según tus necesidades */
+
+  .avatar-container {
+    width: 75px; 
+    height: 75px; 
   }
   
   .avatar-icon {
-    font-size: 24px; /* Ajusta el tamaño del icono según tus necesidades */
-    color: #ffffff; /* Ajusta el color según tus necesidades */
-    background-color: #007bff; /* Ajusta el color de fondo según tus necesidades */
+    font-size: 24px; 
+    color: #ffffff; 
+    background-color: #007bff;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  .base-component {
+    width: 100vw; 
+  }
+  
+  .card {
+    height: 150px;
+  }
+  
+  .button-container {
+    display: flex;
+    margin-top: 15px;
+  }
+
+  h1{
+    align-content: center;
+  }
+  
