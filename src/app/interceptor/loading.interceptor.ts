@@ -20,7 +20,9 @@ export class LoadingInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     this.blockUI.start(this.loadingText);
-    return next.handle(request).pipe(finalize(() => this.blockUI.stop()));
+    return next.handle(request).pipe(finalize(() => setTimeout(() => {
+      this.blockUI.stop()
+    }, 500)));
   }
 }
 

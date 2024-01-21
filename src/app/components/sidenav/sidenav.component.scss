@@ -1,5 +1,23 @@
 .main-container{
-    background-color: #ccc; /* Color de fondo del padre */
-    padding: 60px; 
-    
+    display: flex;
+}
+
+.img-fluid {
+    width: 90%;
+}
+.side-container {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    background-color: #f2f2f2;
+    height: 100vh;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content-screen {
+    flex: 10;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

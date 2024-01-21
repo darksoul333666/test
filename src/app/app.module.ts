@@ -12,7 +12,14 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BlockUIModule } from 'ng-block-ui';
 import { LoadingInterceptor } from './interceptor/loading.interceptor';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CharacterCardComponent } from './shared/character-card.component';
+import { FilersComponent } from './components/filers/filers.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 const routes: Routes = [
   { path: '', component: CharacterListComponent },
@@ -24,12 +31,20 @@ const routes: Routes = [
     AppComponent,
     CharacterListComponent,
     CharacterDetailComponent,
-    SidenavComponent
+    CharacterCardComponent,
+    SidenavComponent,
+    FilersComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
     HttpClientModule,
     NgxsModule.forRoot([
       CharacterState
@@ -43,6 +58,7 @@ const routes: Routes = [
       timeOut: 2500,
       onActivateTick: true
     }),
+    BrowserAnimationsModule,
   ],
   providers: [  
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },      
