@@ -9,12 +9,26 @@
   </div>
   <ng-template #content>
     <div class="card-deck">
-      <app-character-card *ngFor="let item of checkboxItems" (toggleEmit)="toggleSelection($event)" [item]="item">
+      <app-character-card 
+        *ngFor="let item of characters" 
+        (toggleEmit)="toggleSelection(item)" 
+        [item]="item">
       </app-character-card>
+      <div class="button-container">
+        <button mat-fab extended
+        (click)="handleButtonClick()" 
+        color="primary">
+          <mat-icon>visibility</mat-icon>
+          Ver detalles
+        </button>
+        <button mat-fab extended
+        (click)="handleDeleteSelection()" >
+          <mat-icon>delete</mat-icon>
+          Borrar selección
+        </button>
+      </div>
     </div>
-    <div class="button-container d-flex justify-content-center align-items-center mt-3 mb-5">
-      <button type="button" class="btn btn-success" style="width: 150px; height: 70px; border-radius: 15px;" (click)="handleButtonClick()">Seleccionar</button>
-      <button type="button" class="btn btn-primary" style="margin-left: 150px; width: 150px; height: 70px; border-radius: 15px;" (click)="handleDeleteSelection()">Borrar seleccion</button>
-    </div>
+ 
+   
   </ng-template>
 </div>

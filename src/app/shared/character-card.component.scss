@@ -1,18 +1,47 @@
 .avatar-container {
-    width: 75px; 
-    height: 75px; 
-  }
-  
-  .avatar-icon {
-    font-size: 24px; 
-    color: #ffffff; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  flex: 1;
+}
 
-  .card {
-    height: 150px;
-    background-color: white;
-    border-radius: 20px;
-  }
+.card {
+  height: 150px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.card-body {
+  justify-content: space-around;
+}
+
+.data-container {
+  flex: 5;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card-text {
+  width: 50%;
+}
+
+.name-container {
+  flex: 5;
+  display: flex;
+  text-align: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.img-fluid {
+  width: 75px;
+  height: 75px;
+}
+
+.selected {
+  border-color: purple;
+  border-style: solid;
+  border-radius: 20px;
+  border-width: 2px;
+}

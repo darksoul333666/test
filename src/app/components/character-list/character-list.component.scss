@@ -14,3 +14,13 @@
   min-height: calc(100vh - 100px);
   overflow-y: auto;
 }
+
+.button-container {
+  position: absolute;
+  display: flex;
+  bottom: 50px;
+  justify-content: space-around;
+  width: 30%;
+  right: 100px;
+  left: auto;
+}

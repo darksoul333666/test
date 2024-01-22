@@ -1,12 +1,23 @@
 <div class="main-container">
-      <div class="side-container">
-         <a [routerLink]="'/characters/1'">
-            <button type="button" class="btn text-black" style="width: 150px; height: 70px; border: 2px solid purple;">Seleccionar</button>
-         </a>
-         <img src="/assets/side_image.svg" class="img-fluid" alt="Logo">
+   <div class="side-container d-none d-lg-flex">
+      <div class="links-container">
+         <a (click)="selectOption('inicio'); navigateTo('1')" [routerLink]="['/home']" class="link">
+            <div class="box" [ngClass]="{'selected': isSelected('inicio')}">
+              <mat-icon class="icon">home</mat-icon>
+              <div class="text">Inicio</div>
+            </div>
+          </a>
+          <a (click)="selectOption('verSeleccion'); navigateTo('2')" [routerLink]="['/characters/2']" class="link">
+            <div class="box" [ngClass]="{'selected': isSelected('verSeleccion')}">
+              <mat-icon class="icon">visibility</mat-icon>
+              <div class="text">Ver detalle</div>
+            </div>
+          </a>
       </div>
-      <div class="content-screen">
-         <router-outlet></router-outlet>
-      </div>
-</div>
-
+     <img src="/assets/side_image.svg" class="img-fluid" alt="Logo">
+   </div>
+   <div class="content-screen">
+     <router-outlet></router-outlet>
+   </div>
+ </div>
+ 

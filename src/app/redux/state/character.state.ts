@@ -6,7 +6,8 @@ LoadCharactersSuccess,
 LoadCharactersError,
 SelectCharacters,
 ResetSelect, 
-GetCharactersSelected} from '../actions/character.actions';
+GetCharactersSelected,
+RemoveCharacter} from '../actions/character.actions';
 import Character from '../../interfaces/character.interface';
 import { tap, catchError } from 'rxjs/operators';
 import { CharacterService } from 'src/app/services/character.service';
@@ -84,8 +85,22 @@ export class CharacterState {
   @Action(SelectCharacters)
   selectCharacters(ctx: StateContext<CharacterStateModel>, action: SelectCharacters) {
     const { characters } = action.payload;
+    const currentState = ctx.getState();
+    const updatedCharactersSelected = [
+      ...currentState.charactersSelected, ...characters];
     ctx.patchState({
-      charactersSelected: characters,
+      charactersSelected:  updatedCharactersSelected,
+    });
+  }
+
+  @Action(RemoveCharacter)
+  removeCharacter(ctx: StateContext<CharacterStateModel>, action: RemoveCharacter) {
+    const { id } = action.payload;
+    const currentState = ctx.getState();
+    const updatedCharactersSelected = currentState.charactersSelected
+    .filter((item:Character) => item.id !== id);
+    ctx.patchState({
+      charactersSelected:  updatedCharactersSelected,
     });
   }
 

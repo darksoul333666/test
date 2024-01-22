@@ -1,5 +1,5 @@
 import Character from "src/app/interfaces/character.interface";
-import { GET_CHARACTERS_SELECTED, LOAD_CHARACTERS, LOAD_CHARACTERS_ERROR, LOAD_CHARACTERS_SUCCESS, RESET_SELECT, SELECT_CHARACTER } from "../types/character.types";
+import { GET_CHARACTERS_SELECTED, LOAD_CHARACTERS, LOAD_CHARACTERS_ERROR, LOAD_CHARACTERS_SUCCESS, REMOVE_CHARACTER, RESET_SELECT, SELECT_CHARACTER } from "../types/character.types";
 
 export class LoadCharacters {
   static readonly type = LOAD_CHARACTERS;
@@ -18,6 +18,11 @@ export class LoadCharactersError {
 export class SelectCharacters {
   static readonly type = SELECT_CHARACTER;
   constructor(public payload: { characters: Character[] }) {}
+}
+
+export class RemoveCharacter {
+  static readonly type = REMOVE_CHARACTER;
+  constructor(public payload: { id: number }) {}
 }
 
 export class ResetSelect {

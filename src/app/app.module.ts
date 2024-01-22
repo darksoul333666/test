@@ -20,9 +20,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 const routes: Routes = [
-  { path: '', component: CharacterListComponent },
+  { path: 'home', component: CharacterListComponent },
   { path: 'characters/:id', component: CharacterDetailComponent }
 ];
 
@@ -39,24 +43,24 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
-    MatFormFieldModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatGridListModule,
+    MatDividerModule,
+    MatButtonModule,
     HttpClientModule,
+    CarouselModule.forRoot(),
     NgxsModule.forRoot([
       CharacterState
     ]),
     BlockUIModule.forRoot(),
     ToastrModule.forRoot({
-      toastClass: 'toast ngx-toastr',
-      closeButton: true,
-      autoDismiss: true,
-      progressBar: true,
-      timeOut: 2500,
-      onActivateTick: true
+      timeOut: 5000, // Duración de la notificación (en milisegundos)
+      positionClass: 'toast-top-right', // Posición de la notificación
+      preventDuplicates: true, // Evita mostrar duplicados
     }),
     BrowserAnimationsModule,
   ],

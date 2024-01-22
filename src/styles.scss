@@ -45,3 +45,33 @@ body, html {
   
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* styles.css */
+.toast {
+  margin: 0;
+}
+
+/* styles.css */
+.character-card:hover .onda {
+  position: absolute;
+  border: 2px solid #3498db;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  animation: onda-animacion 0.5s linear;
+}
+
+@keyframes onda-animacion {
+  to {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
