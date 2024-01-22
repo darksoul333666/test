@@ -1,34 +1,32 @@
 <div class="base-component">
-  <app-filers/>
-  <div *ngIf="loading; else content">
-    <div class="justify-content-center mt-5">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Cargando...</span>
-      </div>
-    </div>
-  </div>
-  <ng-template #content>
+  <app-filers />
+  <div *ngIf="!loading">
     <div class="card-deck">
-      <app-character-card 
-        *ngFor="let item of characters" 
-        (toggleEmit)="toggleSelection(item)" 
-        [item]="item">
+      <div class="content-pagination">
+        <pagination
+        [customPreviousTemplate]="prevTemplate"
+        [customNextTemplate]="nextTemplate"
+        [totalItems]="30"></pagination>
+        <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+          Siguiente
+        </ng-template>
+         
+        <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+          Previa
+        </ng-template>
+      </div>
+      <app-character-card *ngFor="let item of characters" (toggleEmit)="toggleSelection(item)" [item]="item">
       </app-character-card>
       <div class="button-container">
-        <button mat-fab extended
-        (click)="handleButtonClick()" 
-        color="primary">
+        <button mat-fab extended (click)="handleButtonClick()" color="primary">
           <mat-icon>visibility</mat-icon>
           Ver detalles
         </button>
-        <button mat-fab extended
-        (click)="handleDeleteSelection()" >
+        <button mat-fab extended (click)="handleDeleteSelection()">
           <mat-icon>delete</mat-icon>
           Borrar selección
         </button>
       </div>
     </div>
- 
-   
-  </ng-template>
+  </div>
 </div>

@@ -1,5 +1,8 @@
 <div class="main-container">
    <div class="side-container d-none d-lg-flex">
+      <div class="logo-container">
+        <img src="/assets/rick_and_Morty.svg" class="img-fluid" alt="Logo">
+      </div>
       <div class="links-container">
          <a (click)="selectOption('inicio'); navigateTo('1')" [routerLink]="['/home']" class="link">
             <div class="box" [ngClass]="{'selected': isSelected('inicio')}">

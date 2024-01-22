@@ -24,6 +24,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 const routes: Routes = [
   { path: 'home', component: CharacterListComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
     MatButtonModule,
     HttpClientModule,
     CarouselModule.forRoot(),
+    PaginationModule.forRoot(),
     NgxsModule.forRoot([
       CharacterState
     ]),

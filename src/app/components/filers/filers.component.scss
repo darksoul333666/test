@@ -6,3 +6,27 @@
     margin-top: 30px;
     position: sticky;
 }
+
+.search-container {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+  }
+  
+  .search-icon {
+    margin-right: 8px;
+    color: #7651DD;
+  }
+  
+  .search-input {
+    flex-grow: 1;
+    border: none;
+  }
+  
+  .search-input:focus {
+    outline: none;
+  }
